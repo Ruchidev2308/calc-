@@ -18,7 +18,7 @@ bool checkPrime(int n){
 
 // void function for prime factorization
 void primeFactorization(int factorNum) {
-    if (factorNum == 1) {
+    if (factorNum <= 1) {
         std::cout << "Numbers less than or equal to 1 do not have prime factors.";
         return;
     }
