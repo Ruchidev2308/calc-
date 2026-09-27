@@ -69,6 +69,25 @@ int customLCM(int a , int b) {
     return (a / customGCD(a,b))*b;
 }
 
+// factorial function
+long long calculateFactorial(int n) {
+    if (n < 0) return 0;
+    long long result = 1;
+    for (int i = 1; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+// power funtion
+long long calculatePower(int base, int exponent) {
+    long long result = 1;
+    for (int i = 0; i < exponent; ++i) {
+        result *= base;
+    }
+    return result;
+}
+
 int main() {
    
     std::string calcAgain;
@@ -85,15 +104,26 @@ int main() {
         std::cout << "5. HCF/GCD  " << '\n';
         std::cout << "6. LCM" << '\n';
         std::cout << "7. Prime Numbers" << '\n';
+        std::cout << "8. Factorial" << '\n';
+        std::cout << "9. Power" << '\n';
+
+
 
         std::cout << "Enter: " << '\n';
         std::cin >> op;
 
-        if (op >= '1' && op <= '6'){
+        if ((op >= '1' && op <= '6') || op == '9') {
+            if (op == '9') {
+                std::cout << "Enter base: " << '\n';
+                std::cin >> num1;
+                std::cout << "Enter exponent: " << '\n';
+                std::cin >> num2;
+            } else {
             std::cout << "Enter first number:" << '\n';
             std::cin >> num1;
             std::cout << "Enter second number:" << '\n';
             std::cin >> num2;
+            }
         }    
 
         if (op == '1') {
@@ -154,6 +184,17 @@ int main() {
             else {
                 std::cout << "Invalid selection in Prime menu" << '\n';
             }
+        }
+
+        else if (op == '8') {
+            int factNum;
+            std::cout << "Enter Number: ";
+            std::cin >> factNum;
+            std::cout << factNum << "! = " << calculateFactorial(factNum) << '\n';
+        }
+        else if (op == '9') {
+            std::cout << num1 << "^" << num2 << " = "
+                      << calculatePower(static_cast<int>(num1), static_cast<int>(num2)) << '\n';
         }
         else {
             std::cout << "Invalid" << '\n';
