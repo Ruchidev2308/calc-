@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <numeric>
-
+// I don't strictly require #include <numeric> as I made my own gcd lcm function.
 
 // Check a num is prime 
 bool checkPrime(int n){
@@ -19,11 +18,12 @@ bool checkPrime(int n){
 // void function for listing prime numbers
 void listPrimes(int limit) {
     for (int currentNum = 2; currentNum <= limit; ++currentNum) {
-                    if (checkPrime(currentNum)) {
-                        std::cout << currentNum << " ";
-                    }
-                }
-                std::cout << '\n';
+        if (checkPrime(currentNum)) {
+               std::cout << currentNum << " ";
+            }
+        }
+
+        std::cout << '\n';
 }
 
 // void function for prime factorization
@@ -49,6 +49,24 @@ void primeFactorization(int factorNum) {
         std::cout << factorNum;
     }
     std::cout << '\n';
+}
+
+// custom function for GCD
+int customGCD(int a, int b) {
+    while (b != 0) {
+        int remainder = a % b;
+        a = b;
+        b = remainder;
+    }
+    return a; 
+}
+
+
+
+// custom fucntion for LCM using GCD
+int customLCM(int a , int b) {
+    if (a == 0 || b == 0) return 0;
+    return (a / customGCD(a,b))*b;
 }
 
 int main() {
@@ -96,11 +114,11 @@ int main() {
             }
         }
         else if (op == '5'){
-            int hcf = std::gcd(static_cast<int>(num1), static_cast<int>(num2));
+            int hcf = customGCD(static_cast<int>(num1), static_cast<int>(num2));
             std::cout << "Result: " << hcf << '\n';
         }
         else if (op == '6'){
-            int lcm = std::lcm(static_cast<int>(num1), static_cast<int>(num2));
+            int lcm = customLCM(static_cast<int>(num1), static_cast<int>(num2));
             std::cout << "Result: " << lcm << '\n';
         }
         else if (op == '7') {
