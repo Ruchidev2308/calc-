@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <numeric>
 
 int main() {
    
@@ -14,7 +15,10 @@ int main() {
         std::cout << "2. Subtraction" << '\n';
         std::cout << "3. Multiplication" << '\n';
         std::cout << "4. Division" << '\n';
-        std::cout << "Enter [1,2,3,4]: " << '\n';
+        std::cout << "5. HCF/GCD  " << '\n';
+        std::cout << "6. LCM" << '\n';
+
+        std::cout << "Enter [1,2,3,4,5,6]: " << '\n';
         std::cin >> op;
 
         std::cout << "Enter first number:" << '\n';
@@ -38,6 +42,14 @@ int main() {
             else {
             std::cout << "Error. Division by zero.\n";
             }
+        }
+        else if (op == '5'){
+            int hcf = std::gcd(static_cast<int>(num1), static_cast<int>(num2));
+            std::cout << "Result: " << hcf << '\n';
+        }
+        else if (op == '6'){
+            int lcm = std::lcm(static_cast<int>(num1), static_cast<int>(num2));
+            std::cout << "Result: " << lcm << '\n';
         }
         else {
             std::cout << "Invalid" << '\n';
