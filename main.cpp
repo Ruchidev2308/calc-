@@ -3,6 +3,44 @@
 #include <algorithm>
 #include <numeric>
 
+
+// Check a num is prime and reused in listing prime no.
+bool checkPrime(int n){
+    if (n <= 1) return false;
+    if (n == 2) return true;
+    if (n % 2 == 0) return false;
+
+    for (int i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+// void function for prime factorization
+void primeFactorization(int factorNum) {
+    if (factorNum == 1) {
+        std::cout << "Numbers less than or equal to 1 do not have prime factors.";
+        return;
+    }
+
+    std::cout << "Prime factorization of " << factorNum << " is: ";
+
+    while (factorNum % 2 == 0) {
+        std::cout << 2 << " ";
+        factorNum /= 2;
+    }
+    for (int i = 3; i * i <= factorNum; i += 2) {
+        while (factorNum % i == 0) {
+            std::cout << i << " ";
+            factorNum /= i;
+        }
+    }
+    if (factorNum > 2) {
+        std::cout << factorNum;
+    }
+    std::cout << '\n';
+}
+
 int main() {
    
     std::string calcAgain;
@@ -63,60 +101,24 @@ int main() {
             std::cin >> primechoice;
             if (primechoice == '1'){
                 int primenum;
-                bool isPrime = true;
                 std::cout << "Enter number: " << '\n';
                 std::cin >> primenum;
-                if (primenum <=1) {
-                    isPrime = false;
-                }
-                else if (primenum == 2){
-                    isPrime = true;
-                }
-                else if (primenum % 2 == 0){
-                    isPrime = false;
-                }
-                else {
-                    for (int i = 3; i*i <= primenum; i +=2) {
-                        if (primenum % i == 0){
-                            isPrime = false;
-                            break;
-                        }
-                    }
-                }
-                if (isPrime) {
-                    std::cout << primenum << " is a prime number." << std::endl;
+ 
+                // calling function
+                if(checkPrime(primenum)) {
+                    std::cout << primenum << " is prime." << '\n';
                 } else {
-                    std::cout << primenum << " is not a prime number." << std::endl;
-                }    
+                    std::cout << primenum << " is not prime." << '\n';
+                }
             }
-            else if (primechoice == '2'){
+            else if (primechoice == '2') {
                 int limit;
-                std::cout << "Enter limit number (N): " << '\n';
+                std::cout << "Enter limit: ";
                 std::cin >> limit;
-                if (limit < 2) {
-                    std::cout << "There are no prime numbers less than 2." << '\n';
-                } else {
-                    std::cout << "Prime numbers up to " << limit << " are: " << '\n';
-                    for (int currentNum = 2; currentNum <= limit; ++currentNum) {
-                        bool isPrime = true;
-                        if (currentNum == 2) {
-                            isPrime = true;
-                        }
-                        else if (currentNum % 2 == 0) {
-                            isPrime = false;
-                        }
-                        else {
-                            for (int i = 3; i * i <= currentNum; i += 2) {
-                                if (currentNum % i == 0) {
-                                    isPrime = false;
-                                    break;
-                                }
-                            }
-                        }
-                        if (isPrime) {
-                            std::cout << currentNum << " ";
-                        }
-                    }    
+                for (int currentNum = 2; currentNum <= limit; ++currentNum) {
+                    if (checkPrime(currentNum)) {
+                        std::cout << currentNum << " ";
+                    }
                 }
                 std::cout << '\n';
             }
@@ -124,30 +126,7 @@ int main() {
                 int factorNum;
                 std::cout << "Enter number for prime factorization: " << '\n';
                 std::cin >> factorNum;
-
-                if (factorNum <= 1) {
-                    std::cout << "Numbers less than or equal to 1 do not have prime factors." << '\n';
-                } else {
-                    std::cout << "Prime factorization of " << factorNum << " is: ";
-                    
-                    while (factorNum % 2 == 0) {
-                        std::cout << 2 << " ";
-                        factorNum /= 2;
-                    }
-
-                    for (int i = 3; i * i <= factorNum; i += 2) {
-                        while (factorNum % i == 0) {
-                            std::cout << i << " ";
-                            factorNum /= i;
-                        }
-                    }
-
-                    if (factorNum > 2) {
-                        std::cout << factorNum;
-                    }
-                    std::cout << '\n';
-                }
-        
+                primeFactorization(factorNum);
             }
             else {
                 std::cout << "Invalid selection in Prime menu" << '\n';
