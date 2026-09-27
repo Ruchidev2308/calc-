@@ -4,7 +4,7 @@
 #include <numeric>
 
 
-// Check a num is prime and reused in listing prime no.
+// Check a num is prime 
 bool checkPrime(int n){
     if (n <= 1) return false;
     if (n == 2) return true;
@@ -14,6 +14,16 @@ bool checkPrime(int n){
         if (n % i == 0) return false;
     }
     return true;
+}
+
+// void function for listing prime numbers
+void listPrimes(int limit) {
+    for (int currentNum = 2; currentNum <= limit; ++currentNum) {
+                    if (checkPrime(currentNum)) {
+                        std::cout << currentNum << " ";
+                    }
+                }
+                std::cout << '\n';
 }
 
 // void function for prime factorization
@@ -45,8 +55,8 @@ int main() {
    
     std::string calcAgain;
     do {
-        double num1;
-        double num2;
+        double num1 =  0.0;
+        double num2 =  0.0;
         char op;
         char primechoice;
         std::cout << "Choose:" << '\n';
@@ -94,9 +104,9 @@ int main() {
             std::cout << "Result: " << lcm << '\n';
         }
         else if (op == '7') {
-            std::cout << "Check if a number is prime" << '\n';
-            std::cout << "List prime numbers up to N" << '\n';
-            std::cout << "Prime factorization" << '\n';
+            std::cout << "1. Check if a number is prime" << '\n';
+            std::cout << "2. List prime numbers up to N" << '\n';
+            std::cout << "3. Prime factorization" << '\n';
             std::cout << "Enter [1,2,3]" << '\n';
             std::cin >> primechoice;
             if (primechoice == '1'){
@@ -115,12 +125,7 @@ int main() {
                 int limit;
                 std::cout << "Enter limit: ";
                 std::cin >> limit;
-                for (int currentNum = 2; currentNum <= limit; ++currentNum) {
-                    if (checkPrime(currentNum)) {
-                        std::cout << currentNum << " ";
-                    }
-                }
-                std::cout << '\n';
+                listPrimes(limit);
             }
             else if (primechoice == '3') {
                 int factorNum;
