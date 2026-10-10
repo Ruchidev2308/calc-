@@ -97,6 +97,12 @@ long long calculatePower(int base, int exponent) {
     return result;
 }
 
+//percentage of a number
+double calculatePercent(double percent, double total) {
+    return (percent / 100.0) * total;
+}
+
+
 int main() {
     std::string calcAgain;
     do {
@@ -105,7 +111,7 @@ int main() {
         int op = 0;
         char primechoice;
         
-        std::cout << "Choose:\n";
+        std::cout << "\nChoose:\n";
         std::cout << "1. Addition\n";
         std::cout << "2. Subtraction\n";
         std::cout << "3. Multiplication\n";
@@ -116,8 +122,10 @@ int main() {
         std::cout << "8. Factorial\n";
         std::cout << "9. Power\n";
         std::cout << "10. Permutations and Combinations\n";
+        std::cout << "11. Percentage\n";
 
-        std::cout << "Enter selection (1-10): ";
+
+        std::cout << "Enter selection (1-11): ";
         std::cin >> op;
 
         if (op >= 1 && op <= 6) {
@@ -228,6 +236,25 @@ int main() {
             } else {
                 std::cout << "Invalid selection .\n";
             }
+        }
+        else if (op == 11) {
+            char percentchoice;
+            double a, b;
+            std::cout << "1. Percentage of a number\n";
+            std::cout << "2. Find what percentage one number is of another\n";
+            std::cout << "3. Percentage increase\n";
+            std::cout << "4. Percentage decrease\n";
+            std::cout << "Enter: ";
+            std::cin >> percentchoice;
+            if (percentchoice == '1') {
+                std::cout << "Enter the number: ";
+                std::cin >> a;
+                std::cout << "Enter percentage: ";
+                std::cin >> b;
+                double result = calculatePercent(b,a);
+                std::cout << b << " % of " << a << " is: " << result << "\n";
+
+            } 
         }
         else {
             std::cout << "Invalid Operation Selection.\n";
