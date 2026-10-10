@@ -103,6 +103,23 @@ double calculatePercent(double percent, double total) {
 }
 
 
+ //find what percentage part is of total
+double findPercentage(double part, double total) {
+    return (part / total) * 100.0;
+}
+
+//calculate percentage increase
+double percentageIncrease(double original, double updated) {
+    return ((updated - original) / original) * 100.0;
+}
+
+//clculate percentage decrease
+double percentageDecrease(double original, double updated) {
+    return ((original - updated) / original) * 100.0;
+}
+
+
+
 int main() {
     std::string calcAgain;
     do {
@@ -237,25 +254,86 @@ int main() {
                 std::cout << "Invalid selection .\n";
             }
         }
+        
         else if (op == 11) {
             char percentchoice;
             double a, b;
+
             std::cout << "1. Percentage of a number\n";
             std::cout << "2. Find what percentage one number is of another\n";
             std::cout << "3. Percentage increase\n";
             std::cout << "4. Percentage decrease\n";
-            std::cout << "Enter: ";
+            std::cout << "Enter choice: ";
             std::cin >> percentchoice;
+
             if (percentchoice == '1') {
                 std::cout << "Enter the number: ";
                 std::cin >> a;
                 std::cout << "Enter percentage: ";
                 std::cin >> b;
-                double result = calculatePercent(b,a);
-                std::cout << b << " % of " << a << " is: " << result << "\n";
 
-            } 
+                std::cout << b << "% of " << a << " is: "
+                          << calculatePercent(b, a) << '\n';
+            }
+            else if (percentchoice == '2') {
+            std::cout << "Enter the part: ";
+            std::cin >> a;
+            std::cout << "Enter the total: ";
+            std::cin >> b;
+
+                if (b == 0) {
+                    std::cout << "Error: Total cannot be zero.\n";
+                } else {
+                    std::cout << a << " is "
+                              << findPercentage(a, b) << "% of "
+                              << b << '\n';
+                }
+            }
+            else if (percentchoice == '3') {
+            std::cout << "Enter original value: ";
+            std::cin >> a;
+            std::cout << "Enter new value: ";
+            std::cin >> b;
+
+                if (a == 0) {
+                    std::cout << "Error: Original value cannot be zero.\n";
+                } else {
+                    double result = percentageIncrease(a, b);
+
+                    if (result >= 0) {
+                        std::cout << "Percentage increase: "
+                                  << result << "%\n";
+                    } else {
+                        std::cout << "The value decreased by "
+                                  << -result << "% instead.\n";
+                    }
+                }
+            }
+            else if (percentchoice == '4') {
+            std::cout << "Enter original value: ";
+            std::cin >> a;
+            std::cout << "Enter new value: ";
+            std::cin >> b;
+
+                if (a == 0) {
+                    std::cout << "Error: Original value cannot be zero.\n";
+                } else {
+                    double result = percentageDecrease(a, b);
+
+                    if (result >= 0) {
+                        std::cout << "Percentage decrease: "
+                                  << result << "%\n";
+                    } else {
+                        std::cout << "The value increased by "
+                                  << -result << "% instead.\n";
+            }
         }
+    }
+    else {
+        std::cout << "Invalid percentage selection.\n";
+    }
+}
+
         else {
             std::cout << "Invalid Operation Selection.\n";
         }
