@@ -5,15 +5,7 @@ I'm new to coding, so this project is mainly about learning by actually building
 
 ## Features
 
-* basic arithmetic
-* hcf lcm
-* prime number tools
-* factorial and power
-* permutations and combinations
-* percentage
-* average
+basic arithmetic, hcf, lcm, average, basic geometry, ratio, percentage, fractions, power, factorial, permutations and combinations
 
 ## What's Next
-
-Ratio Geometry Statistics Unit Conversion Arrays Vectors Searching & Sorting File Handling OOP DSA
-
+statistixs, decimal fractions, algebra, BODMAS expression evaluator
