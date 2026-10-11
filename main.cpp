@@ -488,6 +488,111 @@ void ratioMenu() {
     }
 }
 
+//fractions
+int simplifyFraction(int &numerator, int &denominator) {
+    if (denominator == 0) {
+        return 0;
+    }
+
+    if (denominator < 0) {
+        numerator = -numerator;
+        denominator = -denominator;
+    }
+
+    int divisor = customGCD(
+        abs(numerator), abs(denominator)
+    );
+
+    if (divisor != 0) {
+        numerator /= divisor;
+        denominator /= divisor;
+    }
+
+    return 1;
+}
+
+void fractionMenu() {
+    int choice;
+
+    std::cout << "1. Simplify a fraction\n";
+    std::cout << "2. Add fractions\n";
+    std::cout << "3. Subtract fractions\n";
+    std::cout << "4. Multiply fractions\n";
+    std::cout << "5. Divide fractions\n";
+    std::cout << "Choose an operation: ";
+    std::cin >> choice;
+
+    if (choice < 1 || choice > 5) {
+        std::cout << "Invalid choice.\n";
+        return;
+    }
+
+    int a, b;
+
+    std::cout << "Enter numerator: ";
+    std::cin >> a;
+    std::cout << "Enter denominator: ";
+    std::cin >> b;
+
+    if (b == 0) {
+        std::cout << "Denominator cannot be zero.\n";
+        return;
+    }
+
+    if (choice == 1) {
+        simplifyFraction(a, b);
+        std::cout << "Simplified fraction: "
+                  << a << "/" << b << "\n";
+        return;
+    }
+
+    int c, d;
+
+    std::cout << "Enter second numerator: ";
+    std::cin >> c;
+    std::cout << "Enter second denominator: ";
+    std::cin >> d;
+
+    if (d == 0) {
+        std::cout << "Denominator cannot be zero.\n";
+        return;
+    }
+
+    int numerator, denominator;
+
+    switch (choice) {
+        case 2:
+            numerator = a * d + c * b;
+            denominator = b * d;
+            break;
+
+        case 3:
+            numerator = a * d - c * b;
+            denominator = b * d;
+            break;
+
+        case 4:
+            numerator = a * c;
+            denominator = b * d;
+            break;
+
+        case 5:
+            if (c == 0) {
+                std::cout << "Cannot divide by zero.\n";
+                return;
+            }
+            numerator = a * d;
+            denominator = b * c;
+            break;
+    }
+
+    simplifyFraction(numerator, denominator);
+
+    std::cout << "Result: "
+              << numerator << "/" << denominator << "\n";
+}
+
+
 
 int main() {
     std::string calcAgain;
@@ -512,9 +617,10 @@ int main() {
         std::cout << "12. Average\n";
         std::cout << "13. Geometry\n";
         std::cout << "14. Ratio: \n";
+        std::cout << "15. Fractions\n";
 
 
-        std::cout << "Enter selection (1-14): ";
+        std::cout << "Enter selection (1-15): ";
         std::cin >> op;
 
         if (op >= 1 && op <= 6) {
@@ -712,7 +818,11 @@ int main() {
             geometryMenu();
         }
         else if (op == 14) {
+
             ratioMenu();
+        }
+        else if (op == 15) {
+            fractionMenu();
         }
         else {
             std::cout << "Invalid Operation Selection.\n";
