@@ -246,6 +246,100 @@ void averageMenu() {
     }
 }
 
+// geometry
+
+void geometryMenu() {
+    int choice;
+    const double PI = 3.141592653589793;
+
+    std::cout << "1. Square\n";
+    std::cout << "2. Rectangle\n";
+    std::cout << "3. Triangle\n";
+    std::cout << "4. Circle\n";
+    std::cout << "Enter: ";
+    std::cin >> choice;
+
+    double a, b, c, h, area, perimeter;
+
+    switch (choice) {
+        case 1:
+            std::cout << "Enter side: ";
+            std::cin >> a;
+
+            if (a <= 0) {
+                std::cout << "must be positive.\n";
+                break;
+            }
+
+            area = a * a;
+            perimeter = 4 * a;
+
+            std::cout << "Area: " << area << '\n';
+            std::cout << "Perimeter: " << perimeter << '\n';
+            break;
+
+        case 2:
+            std::cout << "Enter length: ";
+            std::cin >> a;
+            std::cout << "Enter width: ";
+            std::cin >> b;
+
+            if (a <= 0 || b <= 0) {
+                std::cout << "must be positive.\n";
+                break;
+            }
+
+            area = a * b;
+            perimeter = 2 * (a + b);
+
+            std::cout << "Area: " << area << '\n';
+            std::cout << "Perimeter: " << perimeter << '\n';
+            break;
+
+        case 3:
+            std::cout << "Enter side 1: ";
+            std::cin >> a;
+            std::cout << "Enter side 2: ";
+            std::cin >> b;
+            std::cout << "Enter side 3: ";
+            std::cin >> c;
+            std::cout << "Enter height corresponding to side 1: ";
+            std::cin >> h;
+
+            if (a <= 0 || b <= 0 || c <= 0 || h <= 0 ||
+                a + b <= c || a + c <= b || b + c <= a) {
+                std::cout << "Invalid.\n";
+                break;
+            }
+
+            area = 0.5 * a * h;
+            perimeter = a + b + c;
+
+            std::cout << "Area: " << area << '\n';
+            std::cout << "Perimeter: " << perimeter << '\n';
+            break;
+
+        case 4:
+            std::cout << "Enter radius: ";
+            std::cin >> a;
+
+            if (a <= 0) {
+                std::cout << "Radius must be positive.\n";
+                break;
+            }
+
+            area = PI * a * a;
+            perimeter = 2 * PI * a;
+
+            std::cout << "Area: " << area << '\n';
+            std::cout << "Circumference: " << perimeter << '\n';
+            break;
+
+        default:
+            std::cout << "Invalid geometry selection.\n";
+    }
+}
+
 int main() {
     std::string calcAgain;
     do {
@@ -267,9 +361,10 @@ int main() {
         std::cout << "10. Permutations and Combinations\n";
         std::cout << "11. Percentage\n";
         std::cout << "12. Average\n";
+        std::cout << "13. Geometry\n";
 
 
-        std::cout << "Enter selection (1-12): ";
+        std::cout << "Enter selection (1-13): ";
         std::cin >> op;
 
         if (op >= 1 && op <= 6) {
@@ -463,7 +558,9 @@ int main() {
         else if (op == 12) {
            averageMenu();
         }
-
+        else if (op == 13) {
+            geometryMenu();
+        }
         else {
             std::cout << "Invalid Operation Selection.\n";
         }
