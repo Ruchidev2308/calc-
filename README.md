@@ -11,17 +11,9 @@ I'm new to coding, so this project is mainly about learning by actually building
 * factorial and power
 * permutations and combinations
 * percentage
-  
-## Concepts
-
-* variables and data types
-* poops
-* functions
-* type casting
-* mathematical algorithms
-* nested menus
+* average
 
 ## What's Next
 
-Ratio Average Geometry Statistics Unit Conversion Arrays Vectors Searching & Sorting File Handling OOP DSA
+Ratio Geometry Statistics Unit Conversion Arrays Vectors Searching & Sorting File Handling OOP DSA
 
