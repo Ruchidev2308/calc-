@@ -118,7 +118,87 @@ double percentageDecrease(double original, double updated) {
     return ((original - updated) / original) * 100.0;
 }
 
+//average (first)
+void calculateAverage() {
+    int count;
+    double number, sum = 0;
 
+    std::cout << "How many numbers? ";
+    std::cin >> count;
+
+    if (count <= 0) {
+        std::cout << "Enter a positive num\n";
+        return;
+    }
+
+    for (int i = 1; i <= count; i++) {
+        std::cout << "Enter number " << i << ": ";
+        std::cin >> number;
+        sum += number;
+    }
+
+    double average = sum / count;
+
+    std::cout << "Sum: " << sum << '\n';
+    std::cout << "No. of values: " << count << '\n';
+    std::cout << "Average: " << average << '\n';
+}
+
+// avg for marks (second)
+void calculateMarksAverage() {
+    int subjects;
+    double marks, total = 0;
+
+    std::cout << "How many subjects? ";
+    std::cin >> subjects;
+
+    if (subjects <= 0) {
+        std::cout << "Enter a positive number.\n";
+        return;
+    }
+
+    for (int i = 1; i <= subjects; i++) {
+        std::cout << "Enter marks for Subject " << i << ": ";
+        std::cin >> marks;
+
+        if (marks < 0 || marks > 100) {
+            std::cout << "Marks must be between 0 and 100.\n";
+            return;
+        }
+
+        total += marks;
+    }
+
+    double average = total / subjects;
+    double percentage = (total / (subjects * 100.0)) * 100.0;
+
+    std::cout << "Total Marks: " << total
+              << " / " << subjects * 100 << '\n';
+    std::cout << "Average Marks: " << average << " / 100\n";
+    std::cout << "Percentage: " << percentage << "%\n";
+}
+
+
+// average calc menu
+void averageMenu() {
+    int choice;
+
+    std::cout << "1. Arithmetic Average\n";
+    //std::cout << "2. Weighted Average\n";  will include soon once i learn about it
+    std::cout << "2. Average of Marks\n";
+    std::cout << "Enter choice: ";
+    std::cin >> choice;
+
+    if (choice == 1) {
+        calculateAverage();
+    }
+    else if (choice == 2) {
+        calculateMarksAverage();
+    }
+    else {
+        std::cout << "Invalid average selection.\n";
+    }
+}
 
 int main() {
     std::string calcAgain;
@@ -140,9 +220,10 @@ int main() {
         std::cout << "9. Power\n";
         std::cout << "10. Permutations and Combinations\n";
         std::cout << "11. Percentage\n";
+        std::cout << "12. Average\n";
 
 
-        std::cout << "Enter selection (1-11): ";
+        std::cout << "Enter selection (1-12): ";
         std::cin >> op;
 
         if (op >= 1 && op <= 6) {
@@ -332,7 +413,10 @@ int main() {
     else {
         std::cout << "Invalid percentage selection.\n";
     }
-}
+        }
+        else if (op == 12) {
+           averageMenu();
+        }
 
         else {
             std::cout << "Invalid Operation Selection.\n";
