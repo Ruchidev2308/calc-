@@ -144,7 +144,50 @@ void calculateAverage() {
     std::cout << "Average: " << average << '\n';
 }
 
-// avg for marks (second)
+
+// weighted avg
+void calculateWeightedAverage() {
+    int count;
+    double value, weight;
+    double weightedSum = 0;
+    double totalWeight = 0;
+
+    std::cout << "How many values? ";
+    std::cin >> count;
+
+    if (count <= 0) {
+        std::cout << "Enter a positive number of values.\n";
+        return;
+    }
+
+    for (int i = 1; i <= count; i++) {
+        std::cout << "Enter value " << i << ": ";
+        std::cin >> value;
+
+        std::cout << "Enter its weight: ";
+        std::cin >> weight;
+
+        if (weight < 0) {
+            std::cout << "Error: Weight cannot be negative.\n";
+            return;
+        }
+
+        weightedSum += value * weight;
+        totalWeight += weight;
+    }
+
+    if (totalWeight == 0) {
+        std::cout << "Error: Total weight cannot be zero.\n";
+        return;
+    }
+
+    std::cout << "Weighted Sum: " << weightedSum << '\n';
+    std::cout << "Total Weight: " << totalWeight << '\n';
+    std::cout << "Weighted Average: "
+              << weightedSum / totalWeight << '\n';
+}
+
+// avg for marks (third)
 void calculateMarksAverage() {
     int subjects;
     double marks, total = 0;
@@ -184,8 +227,8 @@ void averageMenu() {
     int choice;
 
     std::cout << "1. Arithmetic Average\n";
-    //std::cout << "2. Weighted Average\n";  will include soon once i learn about it
-    std::cout << "2. Average of Marks\n";
+    std::cout << "2. Weighted Average\n";  
+    std::cout << "3. Average of Marks\n";
     std::cout << "Enter choice: ";
     std::cin >> choice;
 
@@ -193,6 +236,9 @@ void averageMenu() {
         calculateAverage();
     }
     else if (choice == 2) {
+        calculateWeightedAverage();
+    }
+    else if(choice == 3) {
         calculateMarksAverage();
     }
     else {
