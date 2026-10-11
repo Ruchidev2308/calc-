@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
 #include <cctype>
 #include <cmath>
 
@@ -721,7 +720,10 @@ int main() {
 
         std::cout << "Calculate again? (yes/no): ";
         std::cin >> calcAgain;
-        std::transform(calcAgain.begin(), calcAgain.end(), calcAgain.begin(), ::tolower);
+
+        for (int i = 0; i < calcAgain.length(); i++) {
+            calcAgain[i] = std::tolower(static_cast<unsigned char>(calcAgain[i]));
+        }
 
     } while (calcAgain == "yes" || calcAgain == "y");
 
