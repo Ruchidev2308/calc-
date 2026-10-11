@@ -2,6 +2,7 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <cmath>
 
 // Check a num is prime 
 bool checkPrime(int n){
@@ -246,6 +247,79 @@ void averageMenu() {
     }
 }
 
+
+//triangles
+
+void triangleMenu() {
+    int choice;
+    double a, b, c;
+
+    std::cout << "1. Find hypotenuse\n";
+    std::cout << "2. Find a missing shorter side\n";
+    std::cout << "3. Area using Heron's Formula\n";
+    std::cout << "Enter choice: ";
+    std::cin >> choice;
+
+    switch (choice) {
+        case 1:
+            std::cout << "Enter first perpendicular side: ";
+            std::cin >> a;
+            std::cout << "Enter second perpendicular side: ";
+            std::cin >> b;
+
+            if (a <= 0 || b <= 0) {
+                std::cout << "Sides must be positive.\n";
+                break;
+            }
+
+            c = std::sqrt(a * a + b * b);
+            std::cout << "Hypotenuse: " << c << '\n';
+            break;
+
+        case 2:
+            std::cout << "Enter hypotenuse: ";
+            std::cin >> c;
+            std::cout << "Enter known shorter side: ";
+            std::cin >> a;
+
+            if (a <= 0 || c <= 0 || a >= c) {
+                std::cout << "Invalid side lengths.\n";
+                break;
+            }
+
+            b = std::sqrt(c * c - a * a);
+            std::cout << "Missing side: " << b << '\n';
+            break;
+
+        case 3: {
+            std::cout << "Enter side 1: ";
+            std::cin >> a;
+            std::cout << "Enter side 2: ";
+            std::cin >> b;
+            std::cout << "Enter side 3: ";
+            std::cin >> c;
+
+            if (a <= 0 || b <= 0 || c <= 0 ||
+                a + b <= c || a + c <= b || b + c <= a) {
+                std::cout << "Invalid triangle dimensions.\n";
+                break;
+            }
+
+            double s = (a + b + c) / 2.0;
+            double area = std::sqrt(
+                s * (s - a) * (s - b) * (s - c)
+            );
+
+            std::cout << "Semi-perimeter: " << s << '\n';
+            std::cout << "Area: " << area << '\n';
+            break;
+        }
+
+        default:
+            std::cout << "Invalid triangle selection.\n";
+    }
+}
+
 // geometry
 
 void geometryMenu() {
@@ -256,6 +330,7 @@ void geometryMenu() {
     std::cout << "2. Rectangle\n";
     std::cout << "3. Triangle\n";
     std::cout << "4. Circle\n";
+    std::cout << "5. Triangle Tools\n";
     std::cout << "Enter: ";
     std::cin >> choice;
 
@@ -335,10 +410,85 @@ void geometryMenu() {
             std::cout << "Circumference: " << perimeter << '\n';
             break;
 
+        case 5:
+            triangleMenu();
+            break;
+
         default:
             std::cout << "Invalid geometry selection.\n";
     }
 }
+
+// ration
+
+void ratioMenu() {
+    int choice;
+    double a, b, c, d;
+
+    std::cout << "1. Simplify a ratio\n";
+    std::cout << "2. Check equivalent ratios\n";
+    std::cout << "3. Find a missing value \n";
+    std::cout << "Enter: ";
+    std::cin >> choice;
+
+    switch (choice) {
+        case 1: {
+            int x, y;
+
+            std::cout << "Enter first whole number: ";
+            std::cin >> x;
+            std::cout << "Enter second whole number: ";
+            std::cin >> y;
+
+            if (x < 0 || y < 0 || (x == 0 && y == 0)) {
+                std::cout << "Enter non-negative numbers. not both zero.\n";
+                break;
+            }
+
+            int divisor = customGCD(x, y);
+
+            std::cout << "Simplified ratio: "
+                      << x / divisor << " : " << y / divisor << '\n';
+            break;
+        }
+
+        case 2:
+            std::cout << "Enter first ratio (a:b): ";
+            std::cin >> a >> b;
+            std::cout << "Enter second ratio (c:d): ";
+            std::cin >> c >> d;
+
+            if (a < 0 || b < 0 || c < 0 || d < 0 ||
+                (a == 0 && b == 0) || (c == 0 && d == 0)) {
+                std::cout << "Invalid ratios.\n";
+                break;
+            }
+
+            if (a * d == b * c) {
+                std::cout << "The ratios are equivalent.\n";
+            } else {
+                std::cout << "The ratios are not equivalent.\n";
+            }
+            break;
+
+        case 3:
+            std::cout << "Enter a, b, and c for a:b = c:x: ";
+            std::cin >> a >> b >> c;
+
+            if (a == 0 || b == 0) {
+                std::cout << "a and b must be non-zero.\n";
+                break;
+            }
+
+            d = (b * c) / a;
+            std::cout << "Missing value x = " << d << '\n';
+            break;
+
+        default:
+            std::cout << "Invalid ratio selection.\n";
+    }
+}
+
 
 int main() {
     std::string calcAgain;
@@ -362,9 +512,10 @@ int main() {
         std::cout << "11. Percentage\n";
         std::cout << "12. Average\n";
         std::cout << "13. Geometry\n";
+        std::cout << "14. Ratio: \n";
 
 
-        std::cout << "Enter selection (1-13): ";
+        std::cout << "Enter selection (1-14): ";
         std::cin >> op;
 
         if (op >= 1 && op <= 6) {
@@ -560,6 +711,9 @@ int main() {
         }
         else if (op == 13) {
             geometryMenu();
+        }
+        else if (op == 14) {
+            ratioMenu();
         }
         else {
             std::cout << "Invalid Operation Selection.\n";
