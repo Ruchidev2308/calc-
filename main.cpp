@@ -403,10 +403,10 @@ int main() {
                           << calculatePercent(b, a) << '\n';
             }
             else if (percentchoice == '2') {
-            std::cout << "Enter the part: ";
-            std::cin >> a;
-            std::cout << "Enter the total: ";
-            std::cin >> b;
+                std::cout << "Enter the part: ";
+                std::cin >> a;
+                std::cout << "Enter the total: ";
+                std::cin >> b;
 
                 if (b == 0) {
                     std::cout << "Error: Total cannot be zero.\n";
@@ -417,49 +417,49 @@ int main() {
                 }
             }
             else if (percentchoice == '3') {
-            std::cout << "Enter original value: ";
-            std::cin >> a;
-            std::cout << "Enter new value: ";
-            std::cin >> b;
+                std::cout << "Enter original value: ";
+                std::cin >> a;
+                std::cout << "Enter new value: ";
+                std::cin >> b;
 
                 if (a == 0) {
                     std::cout << "Error: Original value cannot be zero.\n";
-                } else {
-                    double result = percentageIncrease(a, b);
+            } else {
+                double result = percentageIncrease(a, b);
 
-                    if (result >= 0) {
-                        std::cout << "Percentage increase: "
-                                  << result << "%\n";
-                    } else {
-                        std::cout << "The value decreased by "
-                                  << -result << "% instead.\n";
-                    }
+                if (result >= 0) {
+                    std::cout << "Percentage increase: "
+                              << result << "%\n";
+                } else {
+                    std::cout << "The value decreased by "
+                              << -result << "% instead.\n";
                 }
             }
-            else if (percentchoice == '4') {
+        }
+        else if (percentchoice == '4') {
             std::cout << "Enter original value: ";
             std::cin >> a;
             std::cout << "Enter new value: ";
             std::cin >> b;
 
-                if (a == 0) {
-                    std::cout << "Error: Original value cannot be zero.\n";
-                } else {
-                    double result = percentageDecrease(a, b);
+            if (a == 0) {
+                std::cout << "Error: Original value cannot be zero.\n";
+            } else {
+                double result = percentageDecrease(a, b);
 
-                    if (result >= 0) {
-                        std::cout << "Percentage decrease: "
-                                  << result << "%\n";
-                    } else {
-                        std::cout << "The value increased by "
-                                  << -result << "% instead.\n";
+                if (result >= 0) {
+                    std::cout << "Percentage decrease: "
+                              << result << "%\n";
+                } else {
+                    std::cout << "The value increased by "
+                              << -result << "% instead.\n";
+                }
             }
         }
-    }
-    else {
-        std::cout << "Invalid percentage selection.\n";
-    }
+        else {
+            std::cout << "Invalid percentage selection.\n";
         }
+    }
         else if (op == 12) {
            averageMenu();
         }
