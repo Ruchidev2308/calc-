@@ -97,6 +97,20 @@ long long calculatePower(int base, int exponent) {
     return result;
 }
 
+
+// square root
+double calculateSquareRoot(double number) {
+    if (number < 0) {
+        return -1;
+    }
+    return std::sqrt(number);
+}
+
+// cube root
+double calculateCubeRoot(double number) {
+    return std::cbrt(number);
+}
+
 //percentage of a number
 double calculatePercent(double percent, double total) {
     return (percent / 100.0) * total;
@@ -616,11 +630,13 @@ int main() {
         std::cout << "11. Percentage\n";
         std::cout << "12. Average\n";
         std::cout << "13. Geometry\n";
-        std::cout << "14. Ratio: \n";
+        std::cout << "14. Ratio \n";
         std::cout << "15. Fractions\n";
+        std::cout << "16. Square root\n";
+        std::cout << "17. Cube root \n";
 
 
-        std::cout << "Enter selection (1-15): ";
+        std::cout << "Enter selection (1-17): ";
         std::cin >> op;
 
         if (op >= 1 && op <= 6) {
@@ -823,6 +839,26 @@ int main() {
         }
         else if (op == 15) {
             fractionMenu();
+        }
+        else if (op == 16) {
+            double number;
+
+            std::cout << "Enter a number: \n";
+            std::cin >> number;
+            if (number < 0) {
+                std::cout << "Error. Square root of negative number is not real number.";
+            } else {
+                std::cout << "Square root of " << number
+                          << " = " << calculateSquareRoot(number) << '\n';
+            }
+        }
+        else if (op == 17) {
+            double number;
+
+            std::cout << "Enter a number: \n";
+            std::cin >> number;
+            std::cout << "Cube root of " << number
+                      << " = " << calculateCubeRoot(number) << '\n';
         }
         else {
             std::cout << "Invalid Operation Selection.\n";
