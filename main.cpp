@@ -89,12 +89,206 @@ long long calculateCombination(int n, int r) {
 }
 
 // power function
-long long calculatePower(int base, int exponent) {
-    long long result = 1;
-    for (int i = 0; i < exponent; ++i) {
+double calculatePower(double base, int exponent) {
+    if (base == 0 && exponent < 0) {
+        return -1;
+    } 
+
+    double result = 1;
+    int power = exponent;
+
+    if (power < 0) {
+        power = -power;
+    }
+
+    for (int i = 0; i < power; ++i) {
         result *= base;
     }
+    if (exponent < 0) {
+        result = 1.0 / result;
+    }
     return result;
+
+}
+
+//Indices Menu-
+//muultiplication of powers with the same base
+double multiplySameBase(double a, int m, int n) {
+    return calculatePower(a, m + n);
+}
+
+//ddivision of powers with the same base
+double divideSameBase(double a, int m, int n) {
+    return calculatePower(a, m - n);
+}
+
+//power of 1
+double powerOfOne(double a) {
+    return a;
+}
+
+//power of 0
+double powerOfZero(double a) {
+    return 1;
+}
+
+//negative exponent
+double negativeExponent(double a, int m) {
+    return 1.0 / calculatePower(a, m);
+}
+
+//power of a product
+double powerOfProduct(double a, double b, int m) {
+    return calculatePower(a * b, m);
+}
+
+//power of a quotient
+double powerOfQuotient(double a, double b, int m) {
+    return calculatePower(a / b, m);
+}
+
+//power of a power
+double powerOfPower(double a, int m, int n) {
+    return calculatePower(calculatePower(a, m), n);
+}
+
+//negative power of a quotient
+double negativePowerOfQuotient(double a, double b, int m) {
+    return calculatePower(b / a, m);
+}
+
+//INDICES SUBMENU
+void indicesMenu() {
+    int choice;
+    double a, b;
+    int m, n;
+    std::cout << "1. Multiplication of powers (a^m * a^n)\n";
+    std::cout << "2. Division of powers (a^m / a^n)\n";
+    std::cout << "3. Power of 1 (a^1)\n";
+    std::cout << "4. Power of 0 (a^0)\n";
+    std::cout << "5. Negative exponent (a^-m)\n";
+    std::cout << "6. Power of a product ((ab)^m)\n";
+    std::cout << "7. Power of a quotient ((a/b)^m)\n";
+    std::cout << "8. Power of a power ((a^m)^n)\n";
+    std::cout << "9. Negative power of a quotient ((a/b)^-m)\n";
+    std::cout << "Enter choice: ";
+    std::cin >> choice;
+    switch (choice) {
+        case 1:
+            std::cout << "Enter base: ";
+            std::cin >> a;
+            std::cout << "Enter first exponent: ";
+            std::cin >> m;
+            std::cout << "Enter second exponent: ";
+            std::cin >> n;
+            if (a == 0) {
+                std::cout << "Base must be non zero.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << multiplySameBase(a, m, n) << '\n';
+            break;
+        case 2:
+            std::cout << "Enter base: ";
+            std::cin >> a;
+            std::cout << "Enter first exponent: ";
+            std::cin >> m;
+            std::cout << "Enter second exponent: ";
+            std::cin >> n;
+            if (a == 0) {
+                std::cout << "Base must be non zero.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << divideSameBase(a, m, n) << '\n';
+            break;
+        case 3:
+            std::cout << "Enter base: ";
+            std::cin >> a;
+
+            std::cout << "Result: " << powerOfOne(a) << '\n';
+            break;
+        case 4:
+            std::cout << "Enter base: ";
+            std::cin >> a;
+
+            if (a == 0) {
+                std::cout << "Base must be non zero.\n";
+                break;
+            }
+            std::cout << "Result: " << powerOfZero(a) << '\n';
+            break;
+        case 5:
+            std::cout << "Enter base: ";
+            std::cin >> a;
+            std::cout << "Enter positive exponent: ";
+            std::cin >> m;
+            if (a == 0 || m <= 0) {
+                std::cout << "Base must be non zero and exponent positive.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << negativeExponent(a, m) << '\n';
+            break;
+        case 6:
+            std::cout << "Enter first number (a): ";
+            std::cin >> a;
+            std::cout << "Enter second number (b): ";
+            std::cin >> b;
+            std::cout << "Enter exponent: ";
+            std::cin >> m;
+            if ((a * b == 0) && m < 0) {
+                std::cout << "Product cannot be zero for a negative exponent.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << powerOfProduct(a, b, m) << '\n';
+            break;
+        case 7:
+            std::cout << "Enter numerator (a): ";
+            std::cin >> a;
+            std::cout << "Enter denominator (b): ";
+            std::cin >> b;
+            std::cout << "Enter exponent: ";
+            std::cin >> m;
+            if (b == 0 || (a == 0 && m < 0)) {
+                std::cout << "Invalid values for this exponent rule.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << powerOfQuotient(a, b, m) << '\n';
+            break;
+        case 8:
+            std::cout << "Enter base: ";
+            std::cin >> a;
+            std::cout << "Enter first exponent (m): ";
+            std::cin >> m;
+            std::cout << "Enter second exponent (n): ";
+            std::cin >> n;
+            if (a == 0 && m * n < 0) {
+                std::cout << "Zero cannot have a negative exponent.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << powerOfPower(a, m, n) << '\n';
+            break;
+        case 9:
+            std::cout << "Enter numerator (a): ";
+            std::cin >> a;
+            std::cout << "Enter denominator (b): ";
+            std::cin >> b;
+            std::cout << "Enter positive exponent: ";
+            std::cin >> m;
+            if (a == 0 || m <= 0) {
+                std::cout << "Numerator must be non-zero and exponent positive.\n";
+                break;
+            }
+            std::cout << "Result: "
+                      << negativePowerOfQuotient(a, b, m) << '\n';
+            break;
+        default:
+            std::cout << "Invalid indices selection.\n";
+    }
 }
 
 
@@ -606,8 +800,6 @@ void fractionMenu() {
               << numerator << "/" << denominator << "\n";
 }
 
-
-
 int main() {
     std::string calcAgain;
     do {
@@ -625,7 +817,7 @@ int main() {
         std::cout << "6. LCM\n";
         std::cout << "7. Prime Numbers\n";
         std::cout << "8. Factorial\n";
-        std::cout << "9. Power\n";
+        std::cout << "9. Indices and exponents\n";
         std::cout << "10. Permutations and Combinations\n";
         std::cout << "11. Percentage\n";
         std::cout << "12. Average\n";
@@ -635,46 +827,46 @@ int main() {
         std::cout << "16. Square root\n";
         std::cout << "17. Cube root \n";
 
-
         std::cout << "Enter selection (1-17): ";
         std::cin >> op;
 
-        if (op >= 1 && op <= 6) {
+        if (op >= 1 && op <= 4) {
             std::cout << "Enter first number: ";
             std::cin >> num1;
             std::cout << "Enter second number: ";
             std::cin >> num2;
-        } 
-        else if (op == 9) {
-            std::cout << "Enter base: ";
-            std::cin >> num1;
-            std::cout << "Enter exponent: ";
-            std::cin >> num2;
-        }
 
-        if (op == 1) {
-            std::cout << "Result: " << num1 + num2 << '\n';
-        }
-        else if (op == 2) {
-            std::cout << "Result: " << num1 - num2 << '\n';
-        }
-        else if (op == 3) {
-            std::cout << "Result: " << num1 * num2 << '\n';
-        }
-        else if (op == 4) {
-            if (num2 != 0) {
-                std::cout << "Result: " << num1 / num2 << '\n';
-            } else {
-                std::cout << "Error: Division by zero.\n";
+            if (op == 1) {
+                std::cout << "Result: " << num1 + num2 << '\n';
+            }
+            else if (op == 2) {
+                std::cout << "Result: " << num1 - num2 << '\n';
+            }
+            else if (op == 3) {
+                std::cout << "Result: " << num1 * num2 << '\n';
+            }
+            else if (op == 4) {
+                if (num2 != 0) {
+                    std::cout << "Result: " << num1 / num2 << '\n';
+                } else {
+                    std::cout << "Error: Division by zero.\n";
+                }
             }
         }
-        else if (op == 5) {
-            int hcf = customGCD(static_cast<int>(num1), static_cast<int>(num2));
-            std::cout << "Result: " << hcf << '\n';
-        }
-        else if (op == 6) {
-            int lcm = customLCM(static_cast<int>(num1), static_cast<int>(num2));
-            std::cout << "Result: " << lcm << '\n';
+        else if (op == 5 || op == 6) {
+            std::cout << "Enter first number: ";
+            std::cin >> num1;
+            std::cout << "Enter second number: ";
+            std::cin >> num2;
+
+            if (op == 5) {
+                int hcf = customGCD(static_cast<int>(num1), static_cast<int>(num2));
+                std::cout << "Result: " << hcf << '\n';
+            }
+            else if (op == 6) {
+                int lcm = customLCM(static_cast<int>(num1), static_cast<int>(num2));
+                std::cout << "Result: " << lcm << '\n';
+            }
         }
         else if (op == 7) {
             std::cout << "1. Check if a number is prime\n";
@@ -716,8 +908,7 @@ int main() {
             std::cout << factNum << "! = " << calculateFactorial(factNum) << '\n';
         }
         else if (op == 9) {
-            std::cout << num1 << "^" << num2 << " = "
-                      << calculatePower(static_cast<int>(num1), static_cast<int>(num2)) << '\n';
+            indicesMenu();
         }
         else if (op == 10) {
             char percom;
@@ -748,7 +939,6 @@ int main() {
                 std::cout << "Invalid selection .\n";
             }
         }
-        
         else if (op == 11) {
             char percentchoice;
             double a, b;
@@ -791,42 +981,38 @@ int main() {
 
                 if (a == 0) {
                     std::cout << "Error: Original value cannot be zero.\n";
-            } else {
-                double result = percentageIncrease(a, b);
-
-                if (result >= 0) {
-                    std::cout << "Percentage increase: "
-                              << result << "%\n";
                 } else {
-                    std::cout << "The value decreased by "
-                              << -result << "% instead.\n";
+                    double result = percentageIncrease(a, b);
+
+                    if (result >= 0) {
+                        std::cout << "Percentage increase: " << result << "%\n";
+                    } else {
+                        std::cout << "The value decreased by " << -result << "% instead.\n";
+                    }
                 }
             }
-        }
-        else if (percentchoice == '4') {
-            std::cout << "Enter original value: ";
-            std::cin >> a;
-            std::cout << "Enter new value: ";
-            std::cin >> b;
+            else if (percentchoice == '4') {
+                std::cout << "Enter original value: ";
+                std::cin >> a;
+                std::cout << "Enter new value: ";
+                std::cin >> b;
 
-            if (a == 0) {
-                std::cout << "Error: Original value cannot be zero.\n";
-            } else {
-                double result = percentageDecrease(a, b);
-
-                if (result >= 0) {
-                    std::cout << "Percentage decrease: "
-                              << result << "%\n";
+                if (a == 0) {
+                    std::cout << "Error: Original value cannot be zero.\n";
                 } else {
-                    std::cout << "The value increased by "
-                              << -result << "% instead.\n";
+                    double result = percentageDecrease(a, b);
+
+                    if (result >= 0) {
+                        std::cout << "Percentage decrease: " << result << "%\n";
+                    } else {
+                        std::cout << "The value increased by " << -result << "% instead.\n";
+                    }
                 }
             }
+            else {
+                std::cout << "Invalid percentage selection.\n";
+            }
         }
-        else {
-            std::cout << "Invalid percentage selection.\n";
-        }
-    }
         else if (op == 12) {
            averageMenu();
         }
@@ -834,7 +1020,6 @@ int main() {
             geometryMenu();
         }
         else if (op == 14) {
-
             ratioMenu();
         }
         else if (op == 15) {
@@ -842,11 +1027,10 @@ int main() {
         }
         else if (op == 16) {
             double number;
-
             std::cout << "Enter a number: \n";
             std::cin >> number;
             if (number < 0) {
-                std::cout << "Error. Square root of negative number is not real number.";
+                std::cout << "Error. Square root of negative number is not real number. \n";
             } else {
                 std::cout << "Square root of " << number
                           << " = " << calculateSquareRoot(number) << '\n';
@@ -854,7 +1038,6 @@ int main() {
         }
         else if (op == 17) {
             double number;
-
             std::cout << "Enter a number: \n";
             std::cin >> number;
             std::cout << "Cube root of " << number
