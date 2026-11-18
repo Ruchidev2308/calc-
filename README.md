@@ -8,4 +8,4 @@ I'm new to coding, so this project is mainly about learning by actually building
 basic arithmetic, hcf, lcm, average, basic geometry, ratio, percentage, fractions, power, factorial, permutations and combinations, ststistics
 
 ## What's Next
-decimal fractions, algebra, BODMAS expression evaluator
+algebra (im tired)
