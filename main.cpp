@@ -2,6 +2,13 @@
 #include <string>
 #include <cctype>
 #include <cmath>
+#include <stdexcept>
+#include <vector>
+#include <algorithm>
+#include <map>
+
+
+using namespace std;
 
 // Check a num is prime 
 bool checkPrime(int n){
@@ -110,6 +117,9 @@ double calculatePower(double base, int exponent) {
     return result;
 
 }
+
+
+
 
 //Indices Menu-
 //muultiplication of powers with the same base
@@ -800,6 +810,117 @@ void fractionMenu() {
               << numerator << "/" << denominator << "\n";
 }
 
+
+// stats
+void statisticsMenu() {
+    int n;
+    cout << "How many numbers do you want to enter: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Invalid count\n";
+        return;
+    }
+
+    vector<double> data(n);
+    cout << "Enter " << n << " numbers separated by space: ";
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
+    }
+
+    vector<double> sortedData = data;
+    sort(sortedData.begin(), sortedData.end());
+
+    int choice;
+    do {
+        cout << "\nChoose a statistic:\n";
+        cout << "1. Mean (Average)\n";
+        cout << "2. Median\n";
+        cout << "3. Mode\n";
+        cout << "4. Range (Min & Max)\n";
+        cout << "5. Variance & Standard Deviation\n";
+        cout << "6. Show All\n";
+        cout << "0. Back to Main Menu\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        double sum = 0;
+        for (double val : data) sum += val;
+        double mean = sum / n;
+
+        double median;
+        if (n % 2 == 0) {
+            median = (sortedData[n / 2 - 1] + sortedData[n / 2]) / 2.0;
+        } else {
+            median = sortedData[n / 2];
+        }
+
+        double sqDiffSum = 0;
+        for (double val : data) {
+            sqDiffSum += pow(val - mean, 2);
+        }
+        double popVariance = sqDiffSum / n;
+        double popStdDev = sqrt(popVariance);
+
+        switch (choice) {
+            case 1:
+                cout << "Mean: " << mean << "\n";
+                break;
+
+            case 2:
+                cout << "Median: " << median << "\n";
+                break;
+
+            case 3: {
+                map<double, int> freq;
+                int maxFreq = 0;
+                for (double val : data) {
+                    freq[val]++;
+                    if (freq[val] > maxFreq) maxFreq = freq[val];
+                }
+                if (maxFreq == 1) {
+                    cout << "Mode: No mode (all numbers appear once)\n";
+                } else {
+                    cout << "Mode: ";
+                    for (auto const& pair : freq) {
+                        if (pair.second == maxFreq) cout << pair.first << " ";
+                    }
+                    cout << "(appeared " << maxFreq << " times)\n";
+                }
+                break;
+            }
+
+            case 4:
+                cout << "Min: " << sortedData.front() << "\n";
+                cout << "Max: " << sortedData.back() << "\n";
+                cout << "Range: " << sortedData.back() - sortedData.front() << "\n";
+                break;
+
+            case 5:
+                cout << "Population Variance: " << popVariance << "\n";
+                cout << "Population Standard Deviation: " << popStdDev << "\n";
+                break;
+
+            case 6:
+                cout << "Mean: " << mean << "\n";
+                cout << "Median: " << median << "\n";
+                cout << "Min: " << sortedData.front() << " | Max: " << sortedData.back() << "\n";
+                cout << "Range: " << sortedData.back() - sortedData.front() << "\n";
+                cout << "Variance: " << popVariance << "\n";
+                cout << "Standard Deviation: " << popStdDev << "\n";
+                break;
+
+            case 0:
+                cout << "Returning to main menu\n";
+                break;
+
+            default:
+                cout << "Invalid option\n";
+        }
+    } while (choice != 0);
+}
+
+
 int main() {
     std::string calcAgain;
     do {
@@ -820,12 +941,13 @@ int main() {
         std::cout << "9. Indices and exponents\n";
         std::cout << "10. Permutations and Combinations\n";
         std::cout << "11. Percentage\n";
-        std::cout << "12. Average\n";
+        std::cout << "12. Statistics\n";
         std::cout << "13. Geometry\n";
         std::cout << "14. Ratio \n";
         std::cout << "15. Fractions\n";
         std::cout << "16. Square root\n";
         std::cout << "17. Cube root \n";
+        std::cout << "18. Algebraic expressions \n";
 
         std::cout << "Enter selection (1-17): ";
         std::cin >> op;
@@ -1014,7 +1136,7 @@ int main() {
             }
         }
         else if (op == 12) {
-           averageMenu();
+           statisticsMenu();
         }
         else if (op == 13) {
             geometryMenu();
